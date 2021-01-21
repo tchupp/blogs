@@ -6,7 +6,7 @@ This post is in TypeScript.
 
 You are probably familiar with dependency injection. We see it in many forms.
 
-```
+```typescript
 const fetchGithubUser = (axios: AxiosInstance, metrics: Metrics) => (githubUsername: string): Promise<GithubUser> => {
   ...
 };
