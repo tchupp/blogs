@@ -41,3 +41,12 @@ function blahblah(message: IoTMessage) {
   }
 }
 ```
+
+## Errors
+
+```typescript
+type FlowSpecificErrors = 
+  | { _type: "RedisConnectionError", host: string, port: number, operation: string }
+  | { _type: "SpecificExternalApiStatusCodeError", operation: string, status_code: number, response: string }
+  ;
+```
