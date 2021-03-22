@@ -15,8 +15,8 @@ const saveGithubUserToRedis = (redis: RedisClient, metrics: Metrics) => (user: G
   ...
 };
 
-async function fetchAndSave(axios: AxiosInstance, redis: RedisClient, metrics: Metrics): Promise<void> {
-  const githubUser = await fetchGithubUser(axios, metrics)("...");
+async function fetchAndSave(axios: AxiosInstance, redis: RedisClient, metrics: Metrics) => (githubUsername: string): Promise<void> {
+  const githubUser = await fetchGithubUser(axios, metrics)(githubUsername);
   
   await saveGithubUserToRedis(redis, metrics)(githubUser);  
 }
@@ -31,4 +31,30 @@ function main() {
     
 ```
 
-This is a little annoying
+This is a little annoying...
+
+This is better!
+
+```typescript
+const fetchGithubUser = (githubUsername: string): Reader<{axios: AxiosInstance, metrics: Metrics}, Promise<GithubUser>> => {
+  ...
+};
+
+const saveGithubUserToRedis = (user: GithubUser): Reader<{redis: RedisClient, metrics: Metrics}, Promise<void>> => {
+  ...
+};
+
+function fetchAndSave(githubUsername: string): Reader<{axios: AxiosInstance, redis: RedisClient, metrics: Metrics}, Promise<void>> {
+  return fetchGithubUser(axios, metrics)
+      .chain(githubUser => saveGithubUserToRedis(githubUser));
+}
+
+function main() {
+  const axios: AxiosInstance = ...;
+  const redis: RedisClient = ...;
+  const metrics: Metrics = ...;
+  
+  await fetchAndSave(githubUser)
+      .run({axios, redis, metrics});  
+}
+```
