@@ -45,7 +45,7 @@ const saveGithubUserToRedis = (user: GithubUser): Reader<{redis: RedisClient, me
 };
 
 function fetchAndSave(githubUsername: string): Reader<{axios: AxiosInstance, redis: RedisClient, metrics: Metrics}, Promise<void>> {
-  return fetchGithubUser(axios, metrics)
+  return fetchGithubUser(githubUsername)
       .chain(githubUser => saveGithubUserToRedis(githubUser));
 }
 
