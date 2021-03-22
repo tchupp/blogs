@@ -7,18 +7,18 @@ This post is in TypeScript.
 You are probably familiar with dependency injection. We see it in many forms.
 
 ```typescript
-const fetchGithubUser = (axios: AxiosInstance, metrics: Metrics) => (githubUsername: string): Promise<GithubUser> => {
+const fetchGitHubUser = (axios: AxiosInstance, metrics: Metrics) => (githubUsername: string): Promise<GitHubUser> => {
   ...
 };
 
-const saveGithubUserToRedis = (redis: RedisClient, metrics: Metrics) => (user: GithubUser): Promise<void> => {
+const saveGitHubUserToRedis = (redis: RedisClient, metrics: Metrics) => (user: GitHubUser): Promise<void> => {
   ...
 };
 
 async function fetchAndSave(axios: AxiosInstance, redis: RedisClient, metrics: Metrics) => (githubUsername: string): Promise<void> {
-  const githubUser = await fetchGithubUser(axios, metrics)(githubUsername);
+  const githubUser = await fetchGitHubUser(axios, metrics)(githubUsername);
   
-  await saveGithubUserToRedis(redis, metrics)(githubUser);  
+  await saveGitHubUserToRedis(redis, metrics)(githubUser);  
 }
 
 function main() {
@@ -36,17 +36,17 @@ This is a little annoying...
 This is better!
 
 ```typescript
-const fetchGithubUser = (githubUsername: string): Reader<{axios: AxiosInstance, metrics: Metrics}, Promise<GithubUser>> => {
+const fetchGitHubUser = (githubUsername: string): Reader<{axios: AxiosInstance, metrics: Metrics}, Promise<GitHubUser>> => {
   ...
 };
 
-const saveGithubUserToRedis = (user: GithubUser): Reader<{redis: RedisClient, metrics: Metrics}, Promise<void>> => {
+const saveGitHubUserToRedis = (user: GitHubUser): Reader<{redis: RedisClient, metrics: Metrics}, Promise<void>> => {
   ...
 };
 
 function fetchAndSave(githubUsername: string): Reader<{axios: AxiosInstance, redis: RedisClient, metrics: Metrics}, Promise<void>> {
-  return fetchGithubUser(githubUsername)
-      .chain(githubUser => saveGithubUserToRedis(githubUser));
+  return fetchGitHubUser(githubUsername)
+      .chain(githubUser => saveGitHubUserToRedis(githubUser));
 }
 
 function main() {
@@ -55,6 +55,18 @@ function main() {
   const metrics: Metrics = ...;
   
   await fetchAndSave(githubUser)
-      .run({axios, redis, metrics});  
+      .run({axios, redis, metrics});
 }
+```
+
+
+
+```typescript
+type GitHubDependencies = {axios: AxiosInstance, redis: RedisClient, metrics: Metrics};
+
+const github = {
+  users: {
+    search: (query: string): Reader<GitHubDependencies, GitHubUser>
+  }.
+};
 ```
