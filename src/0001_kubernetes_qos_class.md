@@ -50,5 +50,5 @@ status:
 
 ## Reference
 
-https://kubernetes.io/docs/tasks/configure-pod-container/quality-service-pod/
-https://medium.com/google-cloud/quality-of-service-class-qos-in-kubernetes-bb76a89eb2c6
+- https://kubernetes.io/docs/tasks/configure-pod-container/quality-service-pod/
+- https://medium.com/google-cloud/quality-of-service-class-qos-in-kubernetes-bb76a89eb2c6
