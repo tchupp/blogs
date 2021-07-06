@@ -5,11 +5,11 @@ Every Pod in kubernetes will be assigned a QoS class:
 - Burstable
 - Guaranteed
 
-Kubernetes will assign the QoS class based on your resource specifications.
+The QoS class is a derived property that Kubernetes will assign based on your resource specifications. You cannot set this directly.
 
 ## Guaranteed
 
-For a Pod to be given a QoS class of Guaranteed, every Container in the Pod must have a resource requests and limit; and they must be the same.
+For a Pod to be given a QoS class of Guaranteed, every Container (including the InitContainers) in the Pod must have a resource requests and limit; and they must be the same.
 
 Below is an example of a pod that will receive a `Guaranteed` QoS class.  
 ```
