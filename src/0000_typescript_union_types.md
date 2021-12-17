@@ -23,7 +23,7 @@ function join(source: string[], separator: string | number): string {
 but if you want to give your types super powers then you have to use a "tag" to [discriminate the union](https://www.typescriptlang.org/docs/handbook/unions-and-intersections.html#discriminating-unions)
 
 ```typescript
-type Message = 
+type IoTMessage = 
   | { _type: "MessageA", a: number }
   | { _type: "MessageB", b: string }
   ;
