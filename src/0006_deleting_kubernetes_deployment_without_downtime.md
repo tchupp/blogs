@@ -131,7 +131,15 @@ We can take advantage of this structure to be able to change the labels without 
     my-app-10p8a02k18   2         2         2       1m
     ```
 
-1. Delete the old ReplicaSet
+1. Verify that your new Pods are healthy. This will be specific to your application.  
+   If you used a Service to route traffic to your Pods, you can check that the new pods are selected by the Service by running the following
+   ```bash
+   $ kubectl get endpoints -lapp=my-app
+   NAME        ENDPOINTS                                                                  AGE
+   my-app   100.65.104.180:8080,100.65.119.120:8080,100.65.121.106:8080 + 12 more...     116d
+   ```
+
+1. **Once you have confirmed that your new ReplicaSet is healthy and receiving traffic as expected**, delete the old ReplicaSet
     ```bash
     $ kubectl delete replicasets my-app-776b864c75
     replicaset.extensions "my-app-776b864c75" deleted
