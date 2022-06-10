@@ -26,7 +26,7 @@ function main() {
   const redis: RedisClient = ...;
   const metrics: Metrics = ...;
   
-  await fetchAndSave(axios, redis, metrics)(githubUser);  
+  await fetchAndSave(axios, redis, metrics)(githubUsername);  
 }
     
 ```
@@ -54,7 +54,7 @@ function main() {
   const redis: RedisClient = ...;
   const metrics: Metrics = ...;
   
-  await fetchAndSave(githubUser)
+  await fetchAndSave(githubUsername)
       .run({axios, redis, metrics});
 }
 ```
