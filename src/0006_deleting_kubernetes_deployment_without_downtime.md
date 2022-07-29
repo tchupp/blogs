@@ -146,3 +146,8 @@ We can take advantage of this structure to be able to change the labels without 
     ```
 
 You should now have your new labels on your Deployment, and have all the old Pods cleaned up!
+
+
+## Reference
+
+- https://kubernetes.io/docs/tasks/administer-cluster/use-cascading-deletion/#set-orphan-deletion-policy
