@@ -106,9 +106,9 @@ We can take advantage of this structure to be able to change the labels without 
     replicaset.extensions "my-app-798cbb959d" deleted
     ```
 
-1. Delete your Deployment with the `--cascade=false` flag
+1. Delete your Deployment with the `--cascade=orphan` flag
     ```bash
-    $ kubectl delete deploy my-app --cascade=false
+    $ kubectl delete deploy my-app --cascade=orphan
     deployment.extensions "my-app" deleted
     ```
 
