@@ -32,7 +32,9 @@ spec:
 
 Since Kubernetes Deployment's label selectors are immutable, the only way to change this is to delete and re-create the Deployment. Anyone who has deleted a Deployment may know that, by default, the Pods created by the Deployment are also deleted. This isn't great news as it can cause downtime, and makes this opperation seem very difficult to pull off.
 
-Fortunately, there is a way to do this without causing downtime!
+Fortunately, there is a way to do this without completely removing your Pods!
+
+**NOTE: this document does not take into account any other Kubernetes resource that may use labels to identify your Pods (ex. Service resources)**
 
 ## Explanation
 
