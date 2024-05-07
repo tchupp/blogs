@@ -16,8 +16,9 @@ Consumes from Kafka and produces back to a different topic.
 
 Consumes from Kafka, enriches the data (typically by calling out to an API), and produces back to a different topic.
 
-An enrichment processor can often cache the responses from the API, especially if the data is not subject to change.  
-If the API response can be different based on when the call is made, it's recommended to avoid caching or to be extremely conscious of evicting the cache when it makes sense.
+An enrichment processor can often cache the responses from the API, only if the data is not subject to change.  
+If the API response can be different based on when the call is made, this is no longer the recommended approach.  
+If your system fetchs from an API that serves data that can change, you effectively have to "reprocess" events when the APIs data changes. A better approach would be to listen to Events that represent changes to the data, and join that with your trigger events. See below for possible patterns.
 
 ## Single-trigger combination processor
 
